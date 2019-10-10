@@ -19,7 +19,7 @@ if (!cli.path || !cli.module || !cli.tag ) {
 const targetPath = cli.path
 const targetModule = cli.module
 const targetTag = cli.tag
-const targetFullTag = `${targetTag}-${targetModule}`
+const targetFullTag = `${targetModule}-${targetTag}`
 
 // Step 1: Check if git is supported by the machine's cli 
 logger.log('1. Checking for git binary')
