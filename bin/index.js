@@ -36,10 +36,10 @@ if (gitFetchOutput.status !== 0) {
 }
 
 // Step 3: Fetch tag changes
-logger.log('3. Fetch tag version changes')
-const gitPullTagOutput = exec('git pull --tag')
-if (gitPullTagOutput.status !== 0) {
-  logger.error(`git pull failed for the following reason(s): \n${gitPullTagOutput.message}`)
+logger.log('3. Fetch tags from origin')
+const gitFetchTagOutput = exec('git fetch --tag origin')
+if (gitFetchTagOutput.status !== 0) {
+  logger.error(`git fetch failed for the following reason(s): \n${gitFetchTagOutput.message}`)
 }
 
 // Step 4: Check if tag exists
@@ -83,6 +83,13 @@ logger.log('8. Remove created git repository and return to original path')
 const rmGit = exec(`cd ${targetPath} && rm -rf .git`)
 if (rmGit.status !== 0) {
   logger.error(`rm hidden git dir failed for the following reason(s): \n${rmGit.message}`)
+}
+
+// Step 9. Fetch tags changes
+logger.log('9. Fetch updated tags')
+const gitFetchTagOutput2 = exec('git fetch --tag origin')
+if (gitFetchTagOutput2.status !== 0) {
+  logger.error(`git fetch failed for the following reason(s): \n${gitFetchTagOutput2.message}`)
 }
 
 logger.log('Example install paths (switch out protocol as long as the remote + tag works for you) - \n',
